@@ -11,10 +11,10 @@
 		13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.mm */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
-		55C40F8AA9DF83E899E3CDAC /* libPods-OPSQLiteExample.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D9241EC58491DCDC9B61B00F /* libPods-OPSQLiteExample.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		92B54B8E74B0B43081C567EF /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 2C08DBE2BF8FD676ED5D600B /* PrivacyInfo.xcprivacy */; };
 		AC1DF06E9759460CAA51B7B1 /* sample2.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 9218E48CFB1F478CAC374D68 /* sample2.sqlite */; };
+		E7DEF1FE8BDF9765E723E132 /* Pods_OPSQLiteExample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C7A9DE92F858E1CADC7050A /* Pods_OPSQLiteExample.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,13 +24,13 @@
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = OPSQLiteExample/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = OPSQLiteExample/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = OPSQLiteExample/main.m; sourceTree = "<group>"; };
+		1C7A9DE92F858E1CADC7050A /* Pods_OPSQLiteExample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OPSQLiteExample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C08DBE2BF8FD676ED5D600B /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xml; name = PrivacyInfo.xcprivacy; path = OPSQLiteExample/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		3B4392A12AC88292D35C810B /* Pods-OPSQLiteExample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OPSQLiteExample.debug.xcconfig"; path = "Target Support Files/Pods-OPSQLiteExample/Pods-OPSQLiteExample.debug.xcconfig"; sourceTree = "<group>"; };
 		5709B34CF0A7D63546082F79 /* Pods-OPSQLiteExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OPSQLiteExample.release.xcconfig"; path = "Target Support Files/Pods-OPSQLiteExample/Pods-OPSQLiteExample.release.xcconfig"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = OPSQLiteExample/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9218E48CFB1F478CAC374D68 /* sample2.sqlite */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = sample2.sqlite; path = ../assets/sqlite/sample2.sqlite; sourceTree = "<group>"; };
 		96FD9FD0FC4F4540AC7A9CE6 /* sample.sqlite */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = sample.sqlite; path = ../assets/sample.sqlite; sourceTree = "<group>"; };
-		D9241EC58491DCDC9B61B00F /* libPods-OPSQLiteExample.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-OPSQLiteExample.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -39,7 +39,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				55C40F8AA9DF83E899E3CDAC /* libPods-OPSQLiteExample.a in Frameworks */,
+				E7DEF1FE8BDF9765E723E132 /* Pods_OPSQLiteExample.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -64,7 +64,7 @@
 			isa = PBXGroup;
 			children = (
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
-				D9241EC58491DCDC9B61B00F /* libPods-OPSQLiteExample.a */,
+				1C7A9DE92F858E1CADC7050A /* Pods_OPSQLiteExample.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -302,7 +302,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 24CMR7378R;
+				DEVELOPMENT_TEAM = TB6Q4VF626;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = OPSQLiteExample/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "OP SQLite";
@@ -335,7 +335,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 24CMR7378R;
+				DEVELOPMENT_TEAM = TB6Q4VF626;
 				INFOPLIST_FILE = OPSQLiteExample/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "OP SQLite";
 				LD_RUNPATH_SEARCH_PATHS = (

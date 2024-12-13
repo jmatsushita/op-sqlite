@@ -24,6 +24,7 @@ op_sqlite_config = app_package["op-sqlite"]
 use_sqlcipher = false
 use_crsqlite = false
 use_libsql = false
+use_libsql_dyn = false
 performance_mode = false
 phone_version = false
 sqlite_flags = ""
@@ -36,6 +37,7 @@ if(op_sqlite_config != nil)
   use_sqlcipher = op_sqlite_config["sqlcipher"] == true
   use_crsqlite = op_sqlite_config["crsqlite"] == true
   use_libsql = op_sqlite_config["libsql"] == true
+  use_libsql_dyn = op_sqlite_config["libsql_dyn"] == true
   performance_mode = op_sqlite_config["performanceMode"] || false
   phone_version = op_sqlite_config["iosSqlite"] == true
   sqlite_flags = op_sqlite_config["sqliteFlags"] || ""
@@ -77,7 +79,7 @@ Pod::Spec.new do |s|
 
   s.platforms    = { :ios => "13.0", :osx => "10.15", :visionos => "1.0" }
   s.source       = { :git => "https://github.com/op-engineering/op-sqlite.git", :tag => "#{s.version}" }
-  
+
   # Base source files
   source_files = Dir.glob("ios/**/*.{h,m,mm}") + Dir.glob("cpp/**/*.{h,cpp,c}")
 
@@ -105,20 +107,23 @@ Pod::Spec.new do |s|
   }
 
   log_message.call("[OP-SQLITE] Configuration:")
-  
+
   if use_sqlcipher then
     log_message.call("[OP-SQLITE] using SQLCipher 🔒")
     s.exclude_files = "cpp/sqlite3.c", "cpp/sqlite3.h", "cpp/libsql/bridge.c", "cpp/libsql/bridge.h", "cpp/libsql/bridge.cpp", "cpp/libsql/libsql.h"
     xcconfig[:GCC_PREPROCESSOR_DEFINITIONS] += " OP_SQLITE_USE_SQLCIPHER=1 HAVE_FULLFSYNC=1 SQLITE_HAS_CODEC SQLITE_TEMP_STORE=2"
-    s.dependency "OpenSSL-Universal"    
+    s.dependency "OpenSSL-Universal"
   elsif use_libsql then
     log_message.call("[OP-SQLITE] using libsql 📘")
+    s.exclude_files = "cpp/sqlite3.c", "cpp/sqlite3.h", "cpp/sqlcipher/sqlite3.c", "cpp/sqlcipher/sqlite3.h", "cpp/bridge.h", "cpp/bridge.cpp"
+  elsif use_libsql_dyn then
+    log_message.call("[OP-SQLITE] using libsql dylib 📘")
     s.exclude_files = "cpp/sqlite3.c", "cpp/sqlite3.h", "cpp/sqlcipher/sqlite3.c", "cpp/sqlcipher/sqlite3.h", "cpp/bridge.h", "cpp/bridge.cpp"
   else
     log_message.call("[OP-SQLITE] using vanilla SQLite 📦")
     s.exclude_files = "cpp/sqlcipher/sqlite3.c", "cpp/sqlcipher/sqlite3.h", "cpp/libsql/bridge.c", "cpp/libsql/bridge.h", "cpp/libsql/bridge.cpp", "cpp/libsql/libsql.h"
   end
-  
+
   s.dependency "React-callinvoker"
   s.dependency "React"
   if fabric_enabled then
@@ -140,7 +145,7 @@ Pod::Spec.new do |s|
     log_message.call("[OP-SQLITE] RTree enabled 🌲")
     xcconfig[:GCC_PREPROCESSOR_DEFINITIONS] += " SQLITE_ENABLE_RTREE=1"
   end
- 
+
   if phone_version then
     log_message.call("[OP-SQLITE] using iOS embedded SQLite 📱")
     xcconfig[:GCC_PREPROCESSOR_DEFINITIONS] += " OP_SQLITE_USE_PHONE_VERSION=1"
@@ -174,6 +179,23 @@ Pod::Spec.new do |s|
     end
   end
 
+  if use_libsql_dyn then
+    s.static_framework = false
+    xcconfig[:GCC_PREPROCESSOR_DEFINITIONS] += " OP_SQLITE_USE_LIBSQL=1"
+    if use_crsqlite then
+      frameworks = ["ios/CLibsqlDynamic.xcframework", "ios/crsqlite.xcframework"]
+    else
+      frameworks = ["ios/CLibsqlDynamic.xcframework"]
+    end
+  end
+
+  s.pod_target_xcconfig = {
+    'HEADER_SEARCH_PATHS' => '$(PODS_TARGET_SRCROOT)/include',
+    'OTHER_LDFLAGS' => '-ObjC',
+    'ENABLE_BITCODE' => 'NO',
+    'LD_RUNPATH_SEARCH_PATHS' => '$(inherited) @executable_path/Frameworks'
+  }
+
   if sqlite_flags != "" then
     log_message.call("[OP-SQLITE] Custom SQLite flags: #{sqlite_flags}")
     other_cflags += " #{sqlite_flags}"
@@ -183,7 +205,7 @@ Pod::Spec.new do |s|
     log_message.call("[OP_SQLITE] Tokenizers enabled: #{tokenizers}")
     if is_user_app then
       other_cflags += " -DTOKENIZERS_HEADER_PATH=\\\"../c_sources/tokenizers.h\\\""
-    else 
+    else
       other_cflags += " -DTOKENIZERS_HEADER_PATH=\\\"../example/c_sources/tokenizers.h\\\""
     end
   end

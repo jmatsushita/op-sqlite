@@ -74,6 +74,7 @@
     "fts5": true,
     "rtree": true,
     "libsql": false,
+    "libsql_dyn": true,
     "sqliteVec": true,
     "tokenizers": [
       "wordtokenizer",
